@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [Linux, Windows]
-    runs-on: ["${{ matrix.os == 'Linux' && 'ubuntu-latest' || null }}", "${{ matrix.os == 'Windows' && 'windows-latest' || null }}"]
+    runs-on: ["${{ matrix.os == 'Linux' && 'ubuntu-latest' || 'windows-latest' }}"]
   
     steps:
       - uses: actions/checkout@v3
