@@ -7,7 +7,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [Linux, Windows]
+        os: [Linux]
     runs-on: ["${{ matrix.os == 'Linux' && 'ubuntu-latest' || 'windows-latest' }}"]
   
     steps:
@@ -15,3 +15,12 @@ jobs:
 
       - name: Print GitHub CLI version
         run: gh --version
+
+      - name: Create PR
+        id: pr-created
+        run: |
+          pr=$(gh pr create --title "Test PR" --body "Testing Only." --base main --head atai-test | tail -1)
+          echo "pr_number=${pr##*/}" >> $GITHUB_OUTPUT
+
+      - name: Print PR number
+        run: echo ${{ steps.pr-created.outputs.pr_number }}
