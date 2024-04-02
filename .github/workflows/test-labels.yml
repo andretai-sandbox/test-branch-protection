@@ -18,6 +18,8 @@ jobs:
 
       - name: Create PR
         id: pr-created
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           pr=$(gh pr create --title "Test PR" --body "Testing Only." --base main --head atai-test | tail -1)
           echo "pr_number=${pr##*/}" >> $GITHUB_OUTPUT
